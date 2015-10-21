@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">MyPersonalTrainer</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_parameters">Parameters</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="title_music">Music</string>
+    <string name="title_videos">Videos</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
