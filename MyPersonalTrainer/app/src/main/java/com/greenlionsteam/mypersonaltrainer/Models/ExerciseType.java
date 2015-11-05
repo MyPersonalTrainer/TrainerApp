@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 public class ExerciseType {
 
-    String typeName;
-    String videoLink;
-    int duration;
+    public String typeName;
+    public String videoLink;
+    public int duration;
 
     public ExerciseType(String typeName, String videoLink, int duration)
     {

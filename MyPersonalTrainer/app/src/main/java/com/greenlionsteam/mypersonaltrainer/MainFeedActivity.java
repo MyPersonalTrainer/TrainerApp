@@ -19,13 +19,19 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
+import com.greenlionsteam.mypersonaltrainer.Models.ExerciseType;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class MainFeedActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, AddNewExerciseCallback {
 
+    public static ArrayList<Exercise> exercises;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private CharSequence mTitle;
+    private ExerciseListFragment exerciseListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,10 @@ public class MainFeedActivity extends AppCompatActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+        exerciseListFragment = new ExerciseListFragment();
+
+        createExercise();
+
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -44,9 +54,27 @@ public class MainFeedActivity extends AppCompatActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        if (position == 0)
+        if(exerciseListFragment == null)
+            exerciseListFragment = new ExerciseListFragment();
+
+        if (position == 0) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new ExerciseListFragment()).commit();
+                    .replace(R.id.container, exerciseListFragment).commit();
+        }
+    }
+
+    public void createExercise() {
+        ExerciseType.getAllTypes();
+        Exercise e1 = new Exercise("asdf1", ExerciseType.getType(0), new Date(2015, 5, 11, 12, 05));
+        Exercise e2 = new Exercise("asdf2", ExerciseType.getType(1), new Date(2015, 5, 11, 12, 05));
+        Exercise e3 = new Exercise("asdf4", ExerciseType.getType(1), new Date(2015, 5, 12, 15, 05));
+        Exercise e4 = new Exercise("asdf56", ExerciseType.getType(2), new Date(2015, 5, 13, 11, 05));
+
+        exercises = new ArrayList<>();
+        exercises.add(e1);
+        exercises.add(e2);
+        exercises.add(e3);
+        exercises.add(e4);
     }
 
     public void restoreActionBar() {
@@ -80,12 +108,19 @@ public class MainFeedActivity extends AppCompatActivity
     @Override
     public void addNewExercise(Exercise e) {
         //todo add new item to list
+        exercises.add(e);
+        showExercises();
     }
 
     @Override
     public void showExercises() {
         //todo show all exercises list
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new ExerciseListFragment()).commit();
+                .replace(R.id.container, exerciseListFragment).commit();
+    }
+
+    public void showAddingScreen() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new NewExerciseFragment()).commit();
     }
 }

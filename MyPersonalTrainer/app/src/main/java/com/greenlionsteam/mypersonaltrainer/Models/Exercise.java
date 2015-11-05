@@ -6,9 +6,9 @@ import java.util.Date;
  * Created by oleg on 11/5/2015.
  */
 public class Exercise {
-    String name;
-    ExerciseType typeOfExercise;
-    Date dateTime;//date and time of exercise
+    public String name;
+    public ExerciseType typeOfExercise;
+    public Date dateTime;//date and time of exercise
 
     public Exercise(String name, ExerciseType typeOfExercise, Date dateTime)
     {

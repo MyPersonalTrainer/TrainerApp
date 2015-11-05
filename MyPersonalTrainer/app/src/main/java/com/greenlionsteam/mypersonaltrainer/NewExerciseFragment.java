@@ -102,14 +102,22 @@ public class NewExerciseFragment extends Fragment
             }
         });
 
+        renewDateTime();
 
         return view;
+    }
+
+    public void renewDateTime()
+    {
+        date.setText(day+"/"+month+"/"+year);
+        time.setText(h+":"+m);
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         h = hourOfDay;
         m = minute;
+        renewDateTime();
     }
 
     @Override
@@ -117,5 +125,6 @@ public class NewExerciseFragment extends Fragment
         this.day = day;
         this.month = month;
         this.year = year;
+        renewDateTime();
     }
 }
