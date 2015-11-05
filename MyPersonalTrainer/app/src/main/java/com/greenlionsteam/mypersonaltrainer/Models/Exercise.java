@@ -7,15 +7,15 @@ import java.util.Date;
  */
 public class Exercise {
     String name;
-    String videoLink;
-    int duration;//in sec
+    ExerciseType typeOfExercise;
     Date dateTime;//date and time of exercise
 
-    public Exercise(String name, String video, int duration, Date dateTime)
+    public Exercise(String name, ExerciseType typeOfExercise, Date dateTime)
     {
         this.dateTime = dateTime;
         this.name = name;
-        this.videoLink = video;
-        this.duration = duration;
+        this.typeOfExercise = typeOfExercise;
+//        this.videoLink = video;
+//        this.duration = duration;
     }
 }
