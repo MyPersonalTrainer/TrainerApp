@@ -19,19 +19,20 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.greenlionsteam.mypersonaltrainer.fragments.ParametersFragment;
+import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
+import com.greenlionsteam.mypersonaltrainer.Models.ExerciseType;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class MainFeedActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, AddNewExerciseCallback {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+    public static ArrayList<Exercise> exercises;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
+    private ExerciseListFragment exerciseListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class MainFeedActivity extends AppCompatActivity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+
+        exerciseListFragment = new ExerciseListFragment();
+
+        createExercise();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -63,28 +68,29 @@ public class MainFeedActivity extends AppCompatActivity
                     .commit();
         }
     }
+=======
+        if(exerciseListFragment == null)
+            exerciseListFragment = new ExerciseListFragment();
+>>>>>>> origin/additionalBranch
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_schedule);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_calendar);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_parameters);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_statistics);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_music);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_videos);
-                break;
+        if (position == 0) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, exerciseListFragment).commit();
         }
+    }
+
+    public void createExercise() {
+        ExerciseType.getAllTypes();
+        Exercise e1 = new Exercise("asdf1", ExerciseType.getType(0), new Date(2015, 5, 11, 12, 05));
+        Exercise e2 = new Exercise("asdf2", ExerciseType.getType(1), new Date(2015, 5, 11, 12, 05));
+        Exercise e3 = new Exercise("asdf4", ExerciseType.getType(1), new Date(2015, 5, 12, 15, 05));
+        Exercise e4 = new Exercise("asdf56", ExerciseType.getType(2), new Date(2015, 5, 13, 11, 05));
+
+        exercises = new ArrayList<>();
+        exercises.add(e1);
+        exercises.add(e2);
+        exercises.add(e3);
+        exercises.add(e4);
     }
 
     public void restoreActionBar() {
@@ -98,6 +104,9 @@ public class MainFeedActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            // Only show items in the action bar relevant to this screen
+            // if the drawer is not showing. Otherwise, let the drawer
+            // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main_feed, menu);
             restoreActionBar();
             return true;
@@ -115,8 +124,6 @@ public class MainFeedActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public void addNewExercise(Exercise e) {
         //todo add new item to list
@@ -135,5 +142,4 @@ public class MainFeedActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new NewExerciseFragment()).commit();
     }
->>>>>>> origin/additionalBranch
 }
