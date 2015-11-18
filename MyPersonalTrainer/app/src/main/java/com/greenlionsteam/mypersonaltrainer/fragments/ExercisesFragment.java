@@ -15,22 +15,42 @@ package com.greenlionsteam.mypersonaltrainer.fragments;
 
         import com.greenlionsteam.mypersonaltrainer.ExerciseListFragment;
         import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
+        import com.greenlionsteam.mypersonaltrainer.Models.ExerciseModel;
+        import com.greenlionsteam.mypersonaltrainer.Models.ModelParser;
         import com.greenlionsteam.mypersonaltrainer.R;
         import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage1Adapter;
         import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage2Adapter;
+        import com.greenlionsteam.mypersonaltrainer.services.RestClient;
 
         import java.util.ArrayList;
         import java.util.List;
+
+        import retrofit.Callback;
+        import retrofit.RetrofitError;
+        import retrofit.client.Response;
 
 
 public class ExercisesFragment extends Fragment {
 
     private static final String TAG = "ExercisesFragment";
 
+
+    private enum AdapterState{
+        Groups,
+        Exercises,
+        Description // API PLZ MAKE IT.
+    }
+    private int selectedGroup;
+    private int selectedExercise;
+
+
     private View rootView;
     private ListView exercisesListView;
 
-    private int currentAdapter;
+    private AdapterState state;
+
+    ModelParser dataFromJson;
+
     private ArrayAdapter<String> groupAdapter;
     private ArrayAdapter<String> exerciseAdapter;
     private ArrayAdapter<String> exerciseDescriptionAdapter;
@@ -50,7 +70,20 @@ public class ExercisesFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_list_exercises, container, false);
         initViews();
-        setupExerciseGroupAdapter(new String[]{"sasasa1","dasdasd1"});
+
+        RestClient.getApi().getEverything(new Callback<ModelParser>() {
+            @Override
+            public void success(ModelParser modelParser, Response response) {
+                dataFromJson =  modelParser;
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
+        setupExerciseGroupAdapter(new String[]{"Спина", "Груди", "Біцепс", "Тріцепс", "Плечі", "Ноги", "Прес"});
         setupExercisesListView();
         return rootView;
     }
@@ -80,35 +113,113 @@ public class ExercisesFragment extends Fragment {
     }
 
     private void setupExercisesListView() {
-        currentAdapter = 0;
+        state = AdapterState.Groups;
         exercisesListView.setAdapter(groupAdapter);
         exercisesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(currentAdapter == 0) {
-                    setupExerciseAdapter(new String[]{"2", "2"});
+                if(state == AdapterState.Groups) {
+                    setupExerciseAdapter(getInfo(position));
                     exercisesListView.setAdapter(exerciseAdapter);
-                    currentAdapter = 1;
+                    state = AdapterState.Exercises;
+                    selectedGroup = position;
                 }
-                else if(currentAdapter == 1) {
-                    setupExerciseDescriptionAdapter(new String[]{"3", "3"});
+                else if(state == AdapterState.Exercises) {
+                    setupExerciseDescriptionAdapter(new String[]{getExerciseGroup(selectedGroup)[position].getDescription()});
                     exercisesListView.setAdapter(exerciseDescriptionAdapter);
-                    currentAdapter = 2;
+                    state = AdapterState.Description;
+                    selectedExercise = position;
                 }
             }
         });
     }
 
-    public void GetBack(){
-        if(currentAdapter == 1) {
-            setupExerciseGroupAdapter(new String[]{"sasasa1", "dasdasd1"});
-            exercisesListView.setAdapter(groupAdapter);
-            currentAdapter = 0;
+    public ExerciseModel[] getExerciseGroup(int group){
+        switch (group){
+            case 0:
+             return dataFromJson.Back;
+            case 1:
+               return dataFromJson.Chest;
+            case 2:
+                return dataFromJson.Biceps;
+            case 3:
+                return dataFromJson.Triceps;
+            case 4:
+                return dataFromJson.Shoulders;
+            case 5:
+                return dataFromJson.Legs;
+            case 6:
+                return dataFromJson.Press;
+
         }
-        else if(currentAdapter == 2) {
+        return dataFromJson.Back;
+    }
+
+    public String [] getInfo(int group){
+        String [] result ;
+        switch (group){
+            case 0:
+                result = new String[dataFromJson.Back.length];
+                for(int i =0; i< dataFromJson.Back.length;++i){
+                    result[i]=dataFromJson.Back[i].getName();
+                }
+                break;
+            case 1:
+                result = new String[dataFromJson.Chest.length];
+                for(int i =0; i< dataFromJson.Chest.length;++i){
+                    result[i]=dataFromJson.Chest[i].getName();
+                }
+                break;
+            case 2:
+                result = new String[dataFromJson.Biceps.length];
+                for(int i =0; i< dataFromJson.Biceps.length;++i){
+                    result[i]=dataFromJson.Biceps[i].getName();
+                }
+                break;
+            case 3:
+                result = new String[dataFromJson.Triceps.length];
+                for(int i =0; i< dataFromJson.Triceps.length;++i){
+                    result[i]=dataFromJson.Triceps[i].getName();
+                }
+                break;
+            case 4:
+                result = new String[dataFromJson.Shoulders.length];
+                for(int i =0; i< dataFromJson.Shoulders.length;++i){
+                    result[i]=dataFromJson.Shoulders[i].getName();
+                }
+                break;
+            case 5:
+                result = new String[dataFromJson.Legs.length];
+                for(int i =0; i< dataFromJson.Legs.length;++i){
+                    result[i]=dataFromJson.Legs[i].getName();
+                }
+                break;
+            case 6:
+                result = new String[dataFromJson.Press.length];
+                for(int i =0; i< dataFromJson.Press.length;++i){
+                    result[i]=dataFromJson.Press[i].getName();
+                }
+                break;
+            default:
+                result = new String[]{"XZ"};
+                break;
+        }
+        return result;
+    }
+
+
+
+
+    public void GetBack(){
+        if(state == AdapterState.Exercises) {
+            setupExerciseGroupAdapter(new String[]{"Спина", "Груди", "Біцепс", "Тріцепс", "Плечі", "Ноги", "Прес"});
+            exercisesListView.setAdapter(groupAdapter);
+            state = AdapterState.Groups;
+        }
+        else if(state == AdapterState.Description) {
             setupExerciseAdapter(new String[]{"2", "2"});
             exercisesListView.setAdapter(exerciseAdapter);
-            currentAdapter = 1;
+            state = AdapterState.Exercises;
         }
     }
 
