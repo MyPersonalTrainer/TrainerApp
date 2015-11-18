@@ -14,7 +14,7 @@ import com.greenlionsteam.mypersonaltrainer.views.OnParameterViewListener;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterSpinnerView;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterEditView;
 
-public class ParametersPage1Adapter extends BaseAdapter {
+public class ParametersPage2Adapter extends BaseAdapter {
 
     private final int ITEMS_COUNT = 5;
 
@@ -22,10 +22,10 @@ public class ParametersPage1Adapter extends BaseAdapter {
     private FragmentManager fm;
 
     private boolean someBoolParam;
-    private int someIntParam = 0;
+    private int someIntParam;
     private int[] someIntParamVariants;
 
-    public ParametersPage1Adapter(Context context, FragmentManager fm) {
+    public ParametersPage2Adapter(Context context, FragmentManager fm) {
         this.context = context;
         this.fm = fm;
     }
@@ -58,7 +58,6 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
                 view.setDescription(context.getString(R.string.gender_param));
                 view.setValues(new String[]{"Чоловік", "Жінка"});
-                view.setSelectedValue(someIntParam);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {

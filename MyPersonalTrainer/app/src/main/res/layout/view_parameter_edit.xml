@@ -35,7 +35,6 @@
         android:id="@+id/parameter_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/parameter_controls"
         android:layout_centerVertical="true"
         android:textSize="@dimen/parameter_text_size"
         tools:text="Parameter name"/>

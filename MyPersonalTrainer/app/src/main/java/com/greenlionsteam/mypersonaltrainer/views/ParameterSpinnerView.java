@@ -44,7 +44,10 @@ public class ParameterSpinnerView extends RelativeLayout {
         this.description = description;
         titleView.setText(description);
     }
-
+    public void setSelectedValue(int index)
+    {
+        paramSpinner.setSelection(index);
+    }
     public void setValues(String[] values) {
         this.values = values;
         paramSpinner.setAdapter(

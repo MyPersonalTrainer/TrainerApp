@@ -17,7 +17,7 @@
 
     <dimen name="parameter_height">96dp</dimen>
     <dimen name="parameter_text_size">18sp</dimen>
-    <dimen name="parameter_field_width">120dp</dimen>
+    <dimen name="parameter_field_width">180dp</dimen>
     <dimen name="parameter_info_size">48dp</dimen>
 
 </resources>
