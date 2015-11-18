@@ -12,13 +12,11 @@ import com.greenlionsteam.mypersonaltrainer.R;
 import com.greenlionsteam.mypersonaltrainer.fragments.ParameterInfoFragment;
 import com.greenlionsteam.mypersonaltrainer.views.OnParameterViewListener;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterSpinnerView;
+import com.greenlionsteam.mypersonaltrainer.views.ParameterEditView;
 
-/**
- * Created by BohdanUhryn on 15.11.2015.
- */
 public class ParametersPage1Adapter extends BaseAdapter {
 
-    private final int ITEMS_COUNT = 2;
+    private final int ITEMS_COUNT = 5;
 
     private Context context;
     private FragmentManager fm;
@@ -58,8 +56,8 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
                         .from(context)
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
-                view.setDescription(context.getString(R.string.some_bool_param));
-                view.setValues(new String[]{"On", "Off"});
+                view.setDescription(context.getString(R.string.gender_param));
+                view.setValues(new String[]{"Чоловік", "Жінка"});
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -67,21 +65,32 @@ public class ParametersPage1Adapter extends BaseAdapter {
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {
-                        Toast.makeText(
-                                context,
-                                "Selected item is " + (String)selectedItem + " on position " + selectedPosition,
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
                 });
                 return view;
             }
             case 1: {
+                ParameterEditView view = (ParameterEditView) LayoutInflater
+                        .from(context)
+                        .inflate(R.layout.list_item_parameter_edit, parent, false);
+                view.setDescription(context.getString(R.string.age_param));
+                view.setValues(18);
+                view.setOnParameterViewListener(new OnParameterViewListener() {
+                    @Override
+                    public void onShowInfoFragment(String title, String info) {
+                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                    }
+
+                    @Override
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                });
+                return view;
+            }
+            case 3: {
                 ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
                         .from(context)
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
-                view.setDescription(context.getString(R.string.some_int_param));
+                view.setDescription(context.getString(R.string.weight_param));
                 view.setValues(new String[]{"1", "2", "3"});
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
@@ -90,13 +99,41 @@ public class ParametersPage1Adapter extends BaseAdapter {
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {
-                        Toast.makeText(
-                                context,
-                                "Selected item is " + (String) selectedItem + " on position " + selectedPosition,
-                                Toast.LENGTH_LONG)
-                                .show();
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                });
+                return view;
+            }
+            case 4: {
+                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
+                        .from(context)
+                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
+                view.setDescription(context.getString(R.string.height_param));
+                view.setValues(new String[]{"1", "2", "3"});
+                view.setOnParameterViewListener(new OnParameterViewListener() {
+                    @Override
+                    public void onShowInfoFragment(String title, String info) {
+                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
                     }
+
+                    @Override
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                });
+                return view;
+            }
+            case 5: {
+                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
+                        .from(context)
+                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
+                view.setDescription(context.getString(R.string.activity_param));
+                view.setValues(new String[]{"Сидяча робота", "Праця не фізична, але багато ходжу ", "Праця з поміркованим фізичним навантаженням", "Важка фізична праця", "Гружу вагони кожного вечора"});
+                view.setOnParameterViewListener(new OnParameterViewListener() {
+                    @Override
+                    public void onShowInfoFragment(String title, String info) {
+                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                    }
+
+                    @Override
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
                 });
                 return view;
             }

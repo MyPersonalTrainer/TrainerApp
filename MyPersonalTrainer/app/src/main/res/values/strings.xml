@@ -20,7 +20,13 @@
     <string name="info">Інфо</string>
     <string name="ok">Ok</string>
 
-    <string name="some_bool_param">Some bool param</string>
-    <string name="some_int_param">Some int param</string>
+    <string name="gender_param">Стать:</string>
+    <string name="age_param">Вік:</string>
+    <string name="weight_param">Вагу:</string>
+    <string name="height_param">Висота:</string>
+    <string name="activity_param">Рівень фізичної активності:</string>
+    <string name="physical_level_param">Загальна фізична підготовка:</string>
+    <string name="complexity_param">Тілобудова:</string>
+    <string name="training_type_param">Тип тренувань:</string>
 
 </resources>

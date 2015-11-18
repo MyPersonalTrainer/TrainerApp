@@ -3,10 +3,12 @@ package com.greenlionsteam.mypersonaltrainer.views;
 import android.content.Context;
 import android.support.v4.app.DialogFragment;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -17,22 +19,22 @@ import com.greenlionsteam.mypersonaltrainer.R;
 import com.greenlionsteam.mypersonaltrainer.fragments.ParameterInfoFragment;
 
 
-public class ParameterSpinnerView extends RelativeLayout {
+public class ParameterEditView extends RelativeLayout {
 
     private OnParameterViewListener parameterViewListener;
 
     private TextView titleView;
-    private Spinner paramSpinner;
+    private EditText paramEdit;
     private ImageButton infoButton;
 
     private String description;
-    private String[] values;
+    private int value;
 
-    public ParameterSpinnerView(Context context) {
+    public ParameterEditView(Context context) {
         this(context, null);
     }
 
-    public ParameterSpinnerView(Context context, AttributeSet attrs) {
+    public ParameterEditView(Context context, AttributeSet attrs) {
         super(context, attrs);
         parameterViewListener = null;
         inflateView();
@@ -45,10 +47,8 @@ public class ParameterSpinnerView extends RelativeLayout {
         titleView.setText(description);
     }
 
-    public void setValues(String[] values) {
-        this.values = values;
-        paramSpinner.setAdapter(
-                new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, values));
+    public void setValues(int value) {
+        this.value = value;
     }
 
     public void setOnParameterViewListener(OnParameterViewListener parameterViewListener) {
@@ -57,12 +57,12 @@ public class ParameterSpinnerView extends RelativeLayout {
 
     private void inflateView() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_parameter_spinner, this, true);
+        inflater.inflate(R.layout.view_parameter_edit, this, true);
     }
 
     private void initViews() {
         titleView = (TextView) findViewById(R.id.parameter_title);
-        paramSpinner = (Spinner) findViewById(R.id.parameter_spinner);
+        paramEdit = (EditText) findViewById(R.id.parameter_edit);
         infoButton = (ImageButton) findViewById(R.id.parameter_info_button);
     }
 
@@ -75,17 +75,10 @@ public class ParameterSpinnerView extends RelativeLayout {
                 }
             }
         });
-        paramSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        paramEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parameterViewListener != null) {
-                    parameterViewListener.onItemSelected(paramSpinner.getSelectedItem(), position);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                return false;
             }
         });
     }

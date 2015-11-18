@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/parameter_height"
+    android:padding="@dimen/padding_half">
+
+    <LinearLayout
+        android:id="@+id/parameter_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/parameter_edit"
+            android:layout_width="@dimen/parameter_field_width"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:textSize="@dimen/parameter_text_size"
+            android:inputType="number"/>
+
+        <ImageButton
+            android:id="@+id/parameter_info_button"
+            android:layout_width="@dimen/parameter_info_size"
+            android:layout_height="@dimen/parameter_info_size"
+            android:layout_margin="2dp"
+            android:src="@drawable/info_ic"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/parameter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/parameter_controls"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/parameter_text_size"
+        tools:text="Parameter name"/>
+
+</RelativeLayout>
