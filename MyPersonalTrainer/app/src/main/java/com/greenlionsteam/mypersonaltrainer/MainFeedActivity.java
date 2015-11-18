@@ -55,15 +55,26 @@ public class MainFeedActivity extends AppCompatActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-            if(exerciseListFragment == null)
-                 exerciseListFragment = new ExerciseListFragment();
-
-
-    if (position == 0) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, exerciseListFragment).commit();
+        Fragment fragment = null;
+        switch(position) {
+            case 0: {
+                if(exerciseListFragment == null)
+                    exerciseListFragment = new ExerciseListFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, exerciseListFragment).commit();
+                break;
+            }
+            case 2:
+                fragment = ParametersFragment.newInstance();
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, fragment)
+                            .commit();
+                break;
+                }
+        }
     }
-}
 
     public void createExercise() {
         ExerciseType.getAllTypes();
