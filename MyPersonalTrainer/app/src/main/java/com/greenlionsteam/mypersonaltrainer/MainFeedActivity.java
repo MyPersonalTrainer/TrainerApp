@@ -59,10 +59,10 @@ public class MainFeedActivity extends AppCompatActivity
                  exerciseListFragment = new ExerciseListFragment();
 
 
-    if (position == 0) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, exerciseListFragment).commit();
-    }
+            if (position == 0) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, exerciseListFragment).commit();
+            }
 }
 
     public void createExercise() {
