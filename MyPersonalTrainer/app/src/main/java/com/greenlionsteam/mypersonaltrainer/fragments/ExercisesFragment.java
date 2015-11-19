@@ -74,7 +74,10 @@ public class ExercisesFragment extends Fragment {
         RestClient.getApi().getEverything(new Callback<ModelParser>() {
             @Override
             public void success(ModelParser modelParser, Response response) {
-                dataFromJson =  modelParser;
+                dataFromJson = modelParser;
+                setupExerciseGroupAdapter(new String[]{"Спина", "Груди", "Біцепс", "Тріцепс", "Плечі", "Ноги", "Прес"});
+                setupExercisesListView();
+
             }
 
             @Override
@@ -82,9 +85,6 @@ public class ExercisesFragment extends Fragment {
 
             }
         });
-
-        setupExerciseGroupAdapter(new String[]{"Спина", "Груди", "Біцепс", "Тріцепс", "Плечі", "Ноги", "Прес"});
-        setupExercisesListView();
         return rootView;
     }
 
@@ -217,7 +217,7 @@ public class ExercisesFragment extends Fragment {
             state = AdapterState.Groups;
         }
         else if(state == AdapterState.Description) {
-            setupExerciseAdapter(new String[]{"2", "2"});
+            setupExerciseAdapter(getInfo(selectedGroup));
             exercisesListView.setAdapter(exerciseAdapter);
             state = AdapterState.Exercises;
         }

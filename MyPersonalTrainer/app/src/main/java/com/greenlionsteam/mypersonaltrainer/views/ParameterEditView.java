@@ -51,6 +51,10 @@ public class ParameterEditView extends RelativeLayout {
         this.value = value;
     }
 
+    public int getValue() {
+        return this.value;
+    }
+
     public void setOnParameterViewListener(OnParameterViewListener parameterViewListener) {
         this.parameterViewListener = parameterViewListener;
     }

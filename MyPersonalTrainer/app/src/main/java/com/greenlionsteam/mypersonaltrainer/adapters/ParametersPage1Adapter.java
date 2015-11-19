@@ -21,9 +21,12 @@ public class ParametersPage1Adapter extends BaseAdapter {
     private Context context;
     private FragmentManager fm;
 
-    private boolean someBoolParam;
-    private int someIntParam = 0;
-    private int[] someIntParamVariants;
+    private byte gender = 0;
+    private int age = 18;
+    private int weight = 50;
+    private int height = 150;
+    private byte activity = 0;
+
 
     public ParametersPage1Adapter(Context context, FragmentManager fm) {
         this.context = context;
@@ -38,8 +41,11 @@ public class ParametersPage1Adapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         switch (position) {
-            case 0: return someBoolParam;
-            case 1: return someIntParam;
+            case 0: return gender;
+            case 1: return age;
+            case 2: return weight;
+            case 3: return height;
+            case 4: return activity;
         }
         return null;
     }
@@ -58,7 +64,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
                 view.setDescription(context.getString(R.string.gender_param));
                 view.setValues(new String[]{"Чоловік", "Жінка"});
-                view.setSelectedValue(someIntParam);
+                view.setSelectedValue(gender);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -66,7 +72,9 @@ public class ParametersPage1Adapter extends BaseAdapter {
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {
+                        gender = (byte)selectedPosition;
+                    }
                 });
                 return view;
             }
@@ -75,7 +83,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .from(context)
                         .inflate(R.layout.list_item_parameter_edit, parent, false);
                 view.setDescription(context.getString(R.string.age_param));
-                view.setValues(18);
+                view.setValues(age);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -88,11 +96,11 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 return view;
             }
             case 2: {
-                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
+                ParameterEditView view = (ParameterEditView) LayoutInflater
                         .from(context)
-                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
+                        .inflate(R.layout.list_item_parameter_edit, parent, false);
                 view.setDescription(context.getString(R.string.weight_param));
-                view.setValues(new String[]{"1", "2", "3"});
+                view.setValues(weight);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -105,11 +113,11 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 return view;
             }
             case 3: {
-                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
+                ParameterEditView view = (ParameterEditView) LayoutInflater
                         .from(context)
-                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
+                        .inflate(R.layout.list_item_parameter_edit, parent, false);
                 view.setDescription(context.getString(R.string.height_param));
-                view.setValues(new String[]{"1", "2", "3"});
+                view.setValues(height);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -117,7 +125,8 @@ public class ParametersPage1Adapter extends BaseAdapter {
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {
+                    }
                 });
                 return view;
             }
@@ -127,6 +136,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
                 view.setDescription(context.getString(R.string.activity_param));
                 view.setValues(new String[]{"Сидяча робота", "Праця не фізична, але багато ходжу ", "Праця з поміркованим фізичним навантаженням", "Важка фізична праця", "Гружу вагони кожного вечора"});
+                view.setSelectedValue(activity);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -134,7 +144,9 @@ public class ParametersPage1Adapter extends BaseAdapter {
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {
+                        activity = (byte)selectedPosition;
+                    }
                 });
                 return view;
             }

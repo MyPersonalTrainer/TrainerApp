@@ -16,7 +16,7 @@ import com.greenlionsteam.mypersonaltrainer.views.ParameterEditView;
 
 public class ParametersPage2Adapter extends BaseAdapter {
 
-    private final int ITEMS_COUNT = 5;
+    private final int ITEMS_COUNT = 3;
 
     private Context context;
     private FragmentManager fm;
@@ -56,8 +56,8 @@ public class ParametersPage2Adapter extends BaseAdapter {
                 ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
                         .from(context)
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
-                view.setDescription(context.getString(R.string.gender_param));
-                view.setValues(new String[]{"Чоловік", "Жінка"});
+                view.setDescription(context.getString(R.string.physical_level_param));
+                view.setValues(new String[]{"Ніколи не займався спортом", "Займався(лася) раніше спортом", "Займаюся зараз спортом"});
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -70,11 +70,11 @@ public class ParametersPage2Adapter extends BaseAdapter {
                 return view;
             }
             case 1: {
-                ParameterEditView view = (ParameterEditView) LayoutInflater
+                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
                         .from(context)
-                        .inflate(R.layout.list_item_parameter_edit, parent, false);
-                view.setDescription(context.getString(R.string.age_param));
-                view.setValues(18);
+                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
+                view.setDescription(context.getString(R.string.complexity_param));
+                view.setValues(new String[]{"Худа тілобудова", "Середня тілобудова", "Мускулиста тілобудова", "Повна тілобудова", "Дуже повна тілобудова"});
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -90,42 +90,8 @@ public class ParametersPage2Adapter extends BaseAdapter {
                 ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
                         .from(context)
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
-                view.setDescription(context.getString(R.string.weight_param));
-                view.setValues(new String[]{"1", "2", "3"});
-                view.setOnParameterViewListener(new OnParameterViewListener() {
-                    @Override
-                    public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
-                    }
-
-                    @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
-                });
-                return view;
-            }
-            case 3: {
-                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
-                        .from(context)
-                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
-                view.setDescription(context.getString(R.string.height_param));
-                view.setValues(new String[]{"1", "2", "3"});
-                view.setOnParameterViewListener(new OnParameterViewListener() {
-                    @Override
-                    public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
-                    }
-
-                    @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
-                });
-                return view;
-            }
-            case 4: {
-                ParameterSpinnerView view = (ParameterSpinnerView) LayoutInflater
-                        .from(context)
-                        .inflate(R.layout.list_item_parameter_spinner, parent, false);
-                view.setDescription(context.getString(R.string.activity_param));
-                view.setValues(new String[]{"Сидяча робота", "Праця не фізична, але багато ходжу ", "Праця з поміркованим фізичним навантаженням", "Важка фізична праця", "Гружу вагони кожного вечора"});
+                view.setDescription(context.getString(R.string.training_type_param));
+                view.setValues(new String[]{"Силові тренування", "Тренування на витривалість", "Кардіо", "Для набору маси", "Для похудання"});
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {

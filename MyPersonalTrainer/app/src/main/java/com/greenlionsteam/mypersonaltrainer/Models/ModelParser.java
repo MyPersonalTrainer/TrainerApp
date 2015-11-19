@@ -2,9 +2,6 @@ package com.greenlionsteam.mypersonaltrainer.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by andrew on 19.11.15.
- */
 public class ModelParser {
     @SerializedName("Спина")
     public ExerciseModel[] Back;
