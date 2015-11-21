@@ -12,15 +12,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:gravity="center_vertical">
 
-        <Spinner
-            android:id="@+id/parameter_spinner"
+        <EditText
+            android:id="@+id/parameter_edit"
             android:layout_width="@dimen/parameter_field_width"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:textSize="@dimen/parameter_text_size"/>
+            android:textSize="@dimen/parameter_text_size"
+            android:inputType="number"/>
 
         <ImageButton
             android:id="@+id/parameter_info_button"

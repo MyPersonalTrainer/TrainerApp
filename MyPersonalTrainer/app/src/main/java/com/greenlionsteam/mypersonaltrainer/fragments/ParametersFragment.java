@@ -6,19 +6,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.greenlionsteam.mypersonaltrainer.R;
 import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage1Adapter;
+import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage2Adapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by BohdanUhryn on 14.11.2015.
- */
+
 public class ParametersFragment extends Fragment {
 
     private static final String TAG = "ParametersFragment";
@@ -26,6 +26,7 @@ public class ParametersFragment extends Fragment {
     private View rootView;
     private Button backButton;
     private Button nextButton;
+    private Button finishButton;
     private ListView paramsListView;
 
     private int currentAdapter;
@@ -61,6 +62,7 @@ public class ParametersFragment extends Fragment {
     private void initViews() {
         backButton = (Button) rootView.findViewById(R.id.parameters_back_button);
         nextButton = (Button) rootView.findViewById(R.id.parameters_next_button);
+        finishButton = (Button) rootView.findViewById(R.id.parameters_finish_button);
         paramsListView = (ListView) rootView.findViewById(R.id.parameters_list_view);
     }
 
@@ -84,10 +86,20 @@ public class ParametersFragment extends Fragment {
         });
     }
 
+    private void setupFinishButton() {
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //nextPage();
+                setupControlButtonsVisibility();
+            }
+        });
+    }
+
     private void setupParamsListViewAdapters() {
         adapters = new ArrayList<BaseAdapter>();
         adapters.add(new ParametersPage1Adapter(getActivity(), getChildFragmentManager()));
-        adapters.add(new ParametersPage1Adapter(getActivity(), getChildFragmentManager()));
+        adapters.add(new ParametersPage2Adapter(getActivity(), getChildFragmentManager()));
     }
 
     private void setupParamsListView() {
@@ -97,15 +109,17 @@ public class ParametersFragment extends Fragment {
     }
 
     private void setupControlButtonsVisibility() {
-        if (currentAdapter >= adapters.size() - 1) {
-            nextButton.setVisibility(View.INVISIBLE);
-        } else {
-            nextButton.setVisibility(View.VISIBLE);
-        }
+        finishButton.setVisibility(View.GONE);
+        nextButton.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.VISIBLE);
         if (currentAdapter > 0) {
             backButton.setVisibility(View.VISIBLE);
         } else {
             backButton.setVisibility(View.INVISIBLE);
+        }
+        if(currentAdapter == adapters.size()-1) {
+            nextButton.setVisibility(View.GONE);
+            finishButton.setVisibility(View.VISIBLE);
         }
     }
 

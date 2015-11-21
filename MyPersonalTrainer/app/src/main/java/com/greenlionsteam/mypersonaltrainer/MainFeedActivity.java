@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.greenlionsteam.mypersonaltrainer.fragments.ExercisesFragment;
 import com.greenlionsteam.mypersonaltrainer.fragments.ParametersFragment;
 import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
 import com.greenlionsteam.mypersonaltrainer.Models.ExerciseType;
@@ -30,6 +31,9 @@ public class MainFeedActivity extends AppCompatActivity
 
     public static ArrayList<Exercise> exercises;
     private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    private int currentWindow;
+    private ExercisesFragment exercisesFragment;
 
     private CharSequence mTitle;
     private ExerciseListFragment exerciseListFragment;
@@ -55,15 +59,37 @@ public class MainFeedActivity extends AppCompatActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-            if(exerciseListFragment == null)
-                 exerciseListFragment = new ExerciseListFragment();
-
-
-            if (position == 0) {
+        Fragment fragment = null;
+        currentWindow = position;
+        switch(position) {
+            case 0: {
+                if(exerciseListFragment == null)
+                    exerciseListFragment = new ExerciseListFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, exerciseListFragment).commit();
+                break;
             }
-}
+            case 2:
+                fragment = ParametersFragment.newInstance();
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, fragment)
+                            .commit();
+                break;
+                }
+            case 3:
+                fragment = ExercisesFragment.newInstance();
+                exercisesFragment = (ExercisesFragment)fragment;
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, fragment)
+                            .commit();
+                    break;
+                }
+        }
+    }
 
     public void createExercise() {
         ExerciseType.getAllTypes();
@@ -86,6 +112,18 @@ public class MainFeedActivity extends AppCompatActivity
         actionBar.setTitle(mTitle);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(currentWindow == 3)
+        {
+            if(exercisesFragment != null)
+            {
+                exercisesFragment.GetBack();
+            }
+        }
+        else
+         super.onBackPressed();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

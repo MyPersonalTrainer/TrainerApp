@@ -8,9 +8,6 @@ import android.support.v7.app.AlertDialog;
 
 import com.greenlionsteam.mypersonaltrainer.R;
 
-/**
- * Created by BohdanUhryn on 15.11.2015.
- */
 public class ParameterInfoFragment extends DialogFragment {
 
     public static final String TAG = "ParameterInfoFragment";
