@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:textSize="@dimen/parameter_text_size"
+        android:imeOptions="actionDone"
         tools:text="Parameter name"/>
 
 </RelativeLayout>

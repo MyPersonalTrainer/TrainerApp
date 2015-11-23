@@ -18,9 +18,6 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ryan on 11/5/2015.
- */
 public class ExerciseAdapter extends ArrayAdapter<Exercise> {
     Context context;
     ArrayList<Exercise> exerciseList;

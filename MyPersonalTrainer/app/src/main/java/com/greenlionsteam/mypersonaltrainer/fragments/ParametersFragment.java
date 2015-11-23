@@ -124,6 +124,7 @@ public class ParametersFragment extends Fragment {
     }
 
     private void nextPage() {
+        ((ParametersPage1Adapter) adapters.get(0)).setItems();
         if (currentAdapter < adapters.size() - 1) {
             paramsListView.setAdapter(adapters.get(++currentAdapter));
         }
