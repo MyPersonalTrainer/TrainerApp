@@ -14,19 +14,61 @@ import com.greenlionsteam.mypersonaltrainer.views.OnParameterViewListener;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterSpinnerView;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterEditView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParametersPage1Adapter extends BaseAdapter {
 
     private final int ITEMS_COUNT = 5;
 
     private Context context;
     private FragmentManager fm;
-
+    private List<ParameterEditView> viewList = new ArrayList<ParameterEditView>();
     private byte gender = 0;
     private int age = 18;
     private int weight = 50;
     private int height = 150;
     private byte activity = 0;
 
+    public byte getGender() {
+        return gender;
+    }
+
+    public void setGender(byte gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public byte getActivity() {
+        return activity;
+    }
+
+    public void setActivity(byte activity) {
+        this.activity = activity;
+    }
 
     public ParametersPage1Adapter(Context context, FragmentManager fm) {
         this.context = context;
@@ -50,6 +92,13 @@ public class ParametersPage1Adapter extends BaseAdapter {
         return null;
     }
 
+    public void setItems()
+    {
+        age = viewList.get(0).getValue();
+        weight = viewList.get(1).getValue();
+        height = viewList.get(2).getValue();
+    }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -68,12 +117,12 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                        new ParameterInfoFragment("Стать", "Введіть, будь ласка, свою стать, для того, щоб ми могли правильно розрахувати навантаження на ваше тіло").show(fm, ParameterInfoFragment.TAG);
                     }
 
                     @Override
                     public void onItemSelected(Object selectedItem, int selectedPosition) {
-                        gender = (byte)selectedPosition;
+                        gender = (byte) selectedPosition;
                     }
                 });
                 return view;
@@ -87,12 +136,14 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                        new ParameterInfoFragment("Вік", "Вкажіть, будь ласка, Ваш вік").show(fm, ParameterInfoFragment.TAG);
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {
+                    }
                 });
+                viewList.add(view);
                 return view;
             }
             case 2: {
@@ -104,12 +155,14 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                        new ParameterInfoFragment("Вага", "Вкажіть, будь ласка, Вашу вагу").show(fm, ParameterInfoFragment.TAG);
                     }
 
                     @Override
-                    public void onItemSelected(Object selectedItem, int selectedPosition) {}
+                    public void onItemSelected(Object selectedItem, int selectedPosition) {
+                    }
                 });
+                viewList.add(view);
                 return view;
             }
             case 3: {
@@ -121,13 +174,14 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                        new ParameterInfoFragment("Ріст", "Вкажіть, будь ласка, Ваш зріст").show(fm, ParameterInfoFragment.TAG);
                     }
 
                     @Override
                     public void onItemSelected(Object selectedItem, int selectedPosition) {
                     }
                 });
+                viewList.add(view);
                 return view;
             }
             case 4: {
@@ -140,12 +194,12 @@ public class ParametersPage1Adapter extends BaseAdapter {
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
-                        new ParameterInfoFragment(title, info).show(fm, ParameterInfoFragment.TAG);
+                        new ParameterInfoFragment("Фізична активність", "Вкажіть, будь ласка, Ваш рівень фізичної активності").show(fm, ParameterInfoFragment.TAG);
                     }
 
                     @Override
                     public void onItemSelected(Object selectedItem, int selectedPosition) {
-                        activity = (byte)selectedPosition;
+                        activity = (byte) selectedPosition;
                     }
                 });
                 return view;

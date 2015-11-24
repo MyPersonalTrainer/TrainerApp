@@ -166,4 +166,5 @@ public class MainFeedActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new NewExerciseFragment()).commit();
     }
+
 }

@@ -15,9 +15,6 @@ import com.greenlionsteam.mypersonaltrainer.Models.ExerciseType;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by oleg on 11/5/2015.
- */
 public class ExerciseListFragment extends Fragment {
 
     ExerciseAdapter adapter;

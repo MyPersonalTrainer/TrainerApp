@@ -49,10 +49,11 @@ public class ParameterEditView extends RelativeLayout {
 
     public void setValues(int value) {
         this.value = value;
+        paramEdit.setText(Integer.toString(value));
     }
 
     public int getValue() {
-        return this.value;
+        return Integer.parseInt(paramEdit.getText().toString());
     }
 
     public void setOnParameterViewListener(OnParameterViewListener parameterViewListener) {
@@ -82,7 +83,8 @@ public class ParameterEditView extends RelativeLayout {
         paramEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                return false;
+                value = Integer.parseInt(v.getText().toString());
+                return true;
             }
         });
     }

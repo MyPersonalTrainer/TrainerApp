@@ -2,9 +2,6 @@ package com.greenlionsteam.mypersonaltrainer.Models;
 
 import java.util.ArrayList;
 
-/**
- * Created by oleg on 11/5/2015.
- */
 public class ExerciseType {
 
     public String typeName;

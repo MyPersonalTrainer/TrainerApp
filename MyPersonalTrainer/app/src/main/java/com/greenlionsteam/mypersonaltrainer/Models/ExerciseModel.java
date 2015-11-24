@@ -1,8 +1,5 @@
 package com.greenlionsteam.mypersonaltrainer.Models;
 
-/**
- * Created by andrew on 19.11.15.
- */
 public class ExerciseModel {
     private int id;
     private String name;
