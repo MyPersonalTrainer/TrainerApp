@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.greenlionsteam.mypersonaltrainer.Models.UserParameters;
 import com.greenlionsteam.mypersonaltrainer.R;
 import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage1Adapter;
 import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage2Adapter;
@@ -32,6 +33,8 @@ public class ParametersFragment extends Fragment {
     private int currentAdapter;
     private List<BaseAdapter> adapters;
 
+    private UserParameters userParameters;
+
     public static ParametersFragment newInstance() {
         ParametersFragment fragment = new ParametersFragment();
         Bundle args = new Bundle();
@@ -40,6 +43,7 @@ public class ParametersFragment extends Fragment {
     }
 
     public ParametersFragment() {
+        userParameters = new UserParameters();
     }
 
     @Override
@@ -98,8 +102,8 @@ public class ParametersFragment extends Fragment {
 
     private void setupParamsListViewAdapters() {
         adapters = new ArrayList<BaseAdapter>();
-        adapters.add(new ParametersPage1Adapter(getActivity(), getChildFragmentManager()));
-        adapters.add(new ParametersPage2Adapter(getActivity(), getChildFragmentManager()));
+        adapters.add(new ParametersPage1Adapter(getActivity(), getChildFragmentManager(), userParameters));
+        adapters.add(new ParametersPage2Adapter(getActivity(), getChildFragmentManager(), userParameters));
     }
 
     private void setupParamsListView() {
@@ -124,7 +128,8 @@ public class ParametersFragment extends Fragment {
     }
 
     private void nextPage() {
-        ((ParametersPage1Adapter) adapters.get(0)).setItems();
+        ParametersPage1Adapter parametersPage1Adapter = (ParametersPage1Adapter) adapters.get(currentAdapter);
+        parametersPage1Adapter.saveChanges();
         if (currentAdapter < adapters.size() - 1) {
             paramsListView.setAdapter(adapters.get(++currentAdapter));
         }

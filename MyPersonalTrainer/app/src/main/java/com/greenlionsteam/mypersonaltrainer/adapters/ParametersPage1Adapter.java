@@ -2,18 +2,20 @@ package com.greenlionsteam.mypersonaltrainer.adapters;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
+import com.greenlionsteam.mypersonaltrainer.Models.UserParameters;
 import com.greenlionsteam.mypersonaltrainer.R;
 import com.greenlionsteam.mypersonaltrainer.fragments.ParameterInfoFragment;
 import com.greenlionsteam.mypersonaltrainer.views.OnParameterViewListener;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterSpinnerView;
 import com.greenlionsteam.mypersonaltrainer.views.ParameterEditView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
     private Context context;
     private FragmentManager fm;
     private List<ParameterEditView> viewList = new ArrayList<ParameterEditView>();
-    private byte gender = 0;
+    /*private byte gender = 0;
     private int age = 18;
     private int weight = 50;
     private int height = 150;
@@ -68,11 +70,24 @@ public class ParametersPage1Adapter extends BaseAdapter {
 
     public void setActivity(byte activity) {
         this.activity = activity;
+    }*/
+
+    UserParameters userParameters;
+
+    public void saveChanges(){
+        ParameterEditView v1 = weakReferenceSparseArray.get(1).get();
+        ParameterEditView v2 = weakReferenceSparseArray.get(2).get();
+        ParameterEditView v3 = weakReferenceSparseArray.get(3).get();
+
+        userParameters.setAge(v1.getValue());
+        userParameters.setWeight(v2.getValue());
+        userParameters.setHeight(v3.getValue());
     }
 
-    public ParametersPage1Adapter(Context context, FragmentManager fm) {
+    public ParametersPage1Adapter(Context context, FragmentManager fm, UserParameters userParameters) {
         this.context = context;
         this.fm = fm;
+        this.userParameters = userParameters;
     }
 
     @Override
@@ -83,26 +98,21 @@ public class ParametersPage1Adapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         switch (position) {
-            case 0: return gender;
-            case 1: return age;
-            case 2: return weight;
-            case 3: return height;
-            case 4: return activity;
+            case 0: return userParameters.isGender();
+            case 1: return userParameters.getAge();
+            case 2: return userParameters.getWeight();
+            case 3: return userParameters.getHeight();
+            case 4: return userParameters.getActivity();
         }
         return null;
-    }
-
-    public void setItems()
-    {
-        age = viewList.get(0).getValue();
-        weight = viewList.get(1).getValue();
-        height = viewList.get(2).getValue();
     }
 
     @Override
     public long getItemId(int position) {
         return position;
     }
+
+    SparseArray<WeakReference<ParameterEditView>> weakReferenceSparseArray = new SparseArray<>();
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -113,7 +123,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
                 view.setDescription(context.getString(R.string.gender_param));
                 view.setValues(new String[]{"Чоловік", "Жінка"});
-                view.setSelectedValue(gender);
+                view.setSelectedValue(userParameters.isGender()? 1:0);
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -122,7 +132,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
 
                     @Override
                     public void onItemSelected(Object selectedItem, int selectedPosition) {
-                        gender = (byte) selectedPosition;
+                        userParameters.setGender(selectedPosition == 0? false:true );
                     }
                 });
                 return view;
@@ -132,7 +142,10 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .from(context)
                         .inflate(R.layout.list_item_parameter_edit, parent, false);
                 view.setDescription(context.getString(R.string.age_param));
-                view.setValues(age);
+                view.setValues(userParameters.getAge());
+
+                weakReferenceSparseArray.append(1, new WeakReference<ParameterEditView>(view));
+
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -151,7 +164,8 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .from(context)
                         .inflate(R.layout.list_item_parameter_edit, parent, false);
                 view.setDescription(context.getString(R.string.weight_param));
-                view.setValues(weight);
+                view.setValues(userParameters.getWeight());
+                weakReferenceSparseArray.append(2, new WeakReference<ParameterEditView>(view));
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -170,7 +184,8 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .from(context)
                         .inflate(R.layout.list_item_parameter_edit, parent, false);
                 view.setDescription(context.getString(R.string.height_param));
-                view.setValues(height);
+                view.setValues(userParameters.getHeight());
+                weakReferenceSparseArray.append(3, new WeakReference<ParameterEditView>(view));
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -190,7 +205,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
                         .inflate(R.layout.list_item_parameter_spinner, parent, false);
                 view.setDescription(context.getString(R.string.activity_param));
                 view.setValues(new String[]{"Сидяча робота", "Праця не фізична, але багато ходжу ", "Праця з поміркованим фізичним навантаженням", "Важка фізична праця", "Гружу вагони кожного вечора"});
-                view.setSelectedValue(activity);
+                view.setSelectedValue(userParameters.getActivity());
                 view.setOnParameterViewListener(new OnParameterViewListener() {
                     @Override
                     public void onShowInfoFragment(String title, String info) {
@@ -199,7 +214,7 @@ public class ParametersPage1Adapter extends BaseAdapter {
 
                     @Override
                     public void onItemSelected(Object selectedItem, int selectedPosition) {
-                        activity = (byte) selectedPosition;
+                        userParameters.setActivity(selectedPosition);
                     }
                 });
                 return view;
