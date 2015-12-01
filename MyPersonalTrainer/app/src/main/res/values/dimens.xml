@@ -21,5 +21,6 @@
     <dimen name="parameter_info_size">48dp</dimen>
 
     <dimen name="logo_size">300dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

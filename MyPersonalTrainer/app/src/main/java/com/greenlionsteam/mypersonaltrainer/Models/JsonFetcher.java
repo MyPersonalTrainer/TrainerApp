@@ -77,7 +77,7 @@ public class JsonFetcher {
                 JSONArray exercises = jsonObject.getJSONArray("exercises");
                 List<ExerciseModel> exerciseModels = currDay.getExerciseModels();
                 for (int j = 0; j < exercises.length(); j++) {
-                    exerciseModels.add(new ExerciseModel(exercises.getJSONObject(i)));
+                    exerciseModels.add(new ExerciseModel(exercises.getJSONObject(j)));
                 }
 
                 exerciseModelList.add(currDay);
@@ -91,7 +91,7 @@ public class JsonFetcher {
     }
 
     public TrainingModel fetchExercises() throws Exception {//todo constants do
-        TrainingModel trainingModel = new TrainingModel();
+        TrainingModel trainingModel = TrainingModel.Instance();
         try {
             //String date1 = "2015-08-13";
             String url = /*context.getResources().getString(R.string, date);*/

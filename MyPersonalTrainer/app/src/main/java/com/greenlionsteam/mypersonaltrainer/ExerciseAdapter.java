@@ -33,7 +33,9 @@ public class ExerciseAdapter extends ArrayAdapter<TrainingModel.DaysModel> {
 
 
     public void itemClicked(int position) {
-        //context.startActivity(new Intent(Intent.ACTION_VIEW,
+        Intent i = new Intent(context, ExerciseActivity.class);
+        i.putExtra("pos", position);
+        context.startActivity(i);
           //      Uri.parse(exerciseList.get(position).typeOfExercise.videoLink)));
     }
 

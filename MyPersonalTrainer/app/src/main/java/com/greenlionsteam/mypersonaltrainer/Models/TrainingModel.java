@@ -7,7 +7,16 @@ import java.util.List;
 /**
  * Created by Boday-Alfaro on 01.12.2015.
  */
-public class TrainingModel {
+public class TrainingModel  {
+    private static TrainingModel trainingModel;
+    private TrainingModel(){
+
+    }
+    public static TrainingModel Instance(){
+        if (trainingModel == null)
+            trainingModel = new TrainingModel();
+        return trainingModel;
+    }
 
     public List<DaysModel> getDaysModels() {
         return daysModels;
