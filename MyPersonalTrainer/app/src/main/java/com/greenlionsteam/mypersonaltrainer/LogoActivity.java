@@ -28,29 +28,11 @@ public class LogoActivity extends AppCompatActivity {
         initViews();
         startLogoAnimation();
 
-        new DownloadFilesTask().execute();
+        //new DownloadFilesTask().execute();
 
     }
 
-    private class DownloadFilesTask extends AsyncTask<Void, Void, TrainingModel> {
-        protected TrainingModel doInBackground(Void... urls) {
-            TrainingModel trainingModel = null;
-                    JsonFetcher jsonFetcher = new JsonFetcher();
-            try {
-                trainingModel = jsonFetcher.fetchExercises();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return trainingModel;
-        }
 
-        protected void onProgressUpdate(Void... progress) {
-        }
-
-        protected void onPostExecute(TrainingModel result) {
-            TrainingModel model = result;
-        }
-    }
 
     private void initViews() {
         logoView = (ImageView) findViewById(R.id.logo_view);

@@ -13,30 +13,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
+import com.greenlionsteam.mypersonaltrainer.Models.TrainingModel;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ExerciseAdapter extends ArrayAdapter<Exercise> {
+public class ExerciseAdapter extends ArrayAdapter<TrainingModel.DaysModel> {
     Context context;
-    ArrayList<Exercise> exerciseList;
+    List<TrainingModel.DaysModel> exerciseList;
 
-    public ExerciseAdapter(Context context, ArrayList<Exercise> model) {
+    public ExerciseAdapter(Context context, List<TrainingModel.DaysModel> model) {
         super(context, R.layout.list_item);
         this.context = context;
         this.exerciseList = model;
 
     }
 
-    public void addItem(Exercise e) {
-        exerciseList.add(e);
-        notifyDataSetChanged();
-    }
 
     public void itemClicked(int position) {
-        context.startActivity(new Intent(Intent.ACTION_VIEW,
-                Uri.parse(exerciseList.get(position).typeOfExercise.videoLink)));
+        //context.startActivity(new Intent(Intent.ACTION_VIEW,
+          //      Uri.parse(exerciseList.get(position).typeOfExercise.videoLink)));
     }
 
     class  MyViewHolder {
@@ -68,9 +66,9 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
 
         holder.calenderImage.setImageResource(R.drawable.calendar);
         holder.clockImage.setImageResource(R.drawable.clock);
-        holder.fTime.setText(Integer.toString(exerciseList.get(position).typeOfExercise.duration));
-        holder.tTime.setText(exerciseList.get(position).dateTime.toString());
-        holder.eTitle.setText(exerciseList.get(position).name);
+        //holder.fTime.setText(Integer.toString(exerciseList.get(position).typeOfExercise.duration));
+        holder.tTime.setText(exerciseList.get(position).getDate().toString());
+        holder.eTitle.setText(exerciseList.get(position).getName());
         holder.day.setText("Monday");
         return row;
 
