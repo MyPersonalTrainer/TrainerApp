@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/parameter_height"
-    android:padding="@dimen/padding_half">
+    android:padding="@dimen/padding_half"
+    android:windowSoftInputMode="stateHidden|adjustResize">
 
     <LinearLayout
         android:id="@+id/parameter_controls"
@@ -20,7 +21,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:textSize="@dimen/parameter_text_size"
-            android:inputType="number"/>
+
+            android:inputType="number"
+
+            android:numeric="integer"
+            android:digits="0123456789"
+            android:singleLine="true"
+            android:ems="4"/>
 
         <ImageButton
             android:id="@+id/parameter_info_button"

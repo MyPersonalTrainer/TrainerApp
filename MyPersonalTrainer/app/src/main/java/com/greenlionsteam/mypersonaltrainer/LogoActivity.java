@@ -1,12 +1,16 @@
 package com.greenlionsteam.mypersonaltrainer;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.greenlionsteam.mypersonaltrainer.Models.JsonFetcher;
+import com.greenlionsteam.mypersonaltrainer.Models.TrainingModel;
 
 /**
  * Created by BohdanUhryn on 29.11.2015.
@@ -23,6 +27,29 @@ public class LogoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_logo);
         initViews();
         startLogoAnimation();
+
+        new DownloadFilesTask().execute();
+
+    }
+
+    private class DownloadFilesTask extends AsyncTask<Void, Void, TrainingModel> {
+        protected TrainingModel doInBackground(Void... urls) {
+            TrainingModel trainingModel = null;
+                    JsonFetcher jsonFetcher = new JsonFetcher();
+            try {
+                trainingModel = jsonFetcher.fetchExercises();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return trainingModel;
+        }
+
+        protected void onProgressUpdate(Void... progress) {
+        }
+
+        protected void onPostExecute(TrainingModel result) {
+            TrainingModel model = result;
+        }
     }
 
     private void initViews() {
