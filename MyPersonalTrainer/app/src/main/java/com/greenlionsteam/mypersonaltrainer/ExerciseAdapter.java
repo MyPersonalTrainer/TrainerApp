@@ -66,8 +66,8 @@ public class ExerciseAdapter extends ArrayAdapter<TrainingModel.DaysModel> {
             holder = (MyViewHolder) row.getTag();
         }
 
-        holder.calenderImage.setImageResource(R.drawable.calendar);
-        holder.clockImage.setImageResource(R.drawable.clock);
+        holder.calenderImage.setImageResource(R.drawable.clock_icon);
+        holder.clockImage.setImageResource(R.drawable.calendar_icon);
         //holder.fTime.setText(Integer.toString(exerciseList.get(position).typeOfExercise.duration));
         holder.tTime.setText(exerciseList.get(position).getDate().toString());
         holder.eTitle.setText(exerciseList.get(position).getName());

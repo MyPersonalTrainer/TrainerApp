@@ -2,13 +2,20 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--    <item name="android:background">@drawable/hbutton</item>-->
+
         <!-- Customize your theme here. -->
     </style>
+    <style name="ThemeButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/hbutton</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>

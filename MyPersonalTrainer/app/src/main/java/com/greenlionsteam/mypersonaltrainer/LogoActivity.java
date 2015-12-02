@@ -12,9 +12,7 @@ import android.widget.ImageView;
 import com.greenlionsteam.mypersonaltrainer.Models.JsonFetcher;
 import com.greenlionsteam.mypersonaltrainer.Models.TrainingModel;
 
-/**
- * Created by BohdanUhryn on 29.11.2015.
- */
+
 public class LogoActivity extends AppCompatActivity {
 
     private ImageView logoView;

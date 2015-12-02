@@ -6,10 +6,25 @@
     android:background="#cccc">
 
     <ImageView
+        android:id="@+id/logo"
+        android:layout_width="768dp"
+        android:src="@drawable/logo_back"
+        android:layout_height="1080dp"
+        android:contentDescription="@string/back"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
         android:id="@+id/logo_view"
         android:layout_width="@dimen/logo_size"
         android:layout_height="@dimen/logo_size"
         android:src="@drawable/pt_logo"
-        android:layout_centerInParent="true"/>
+        android:contentDescription="@string/logo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

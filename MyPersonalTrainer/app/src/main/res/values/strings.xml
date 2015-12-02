@@ -30,5 +30,7 @@
     <string name="complexity_param">Тілобудова:</string>
     <string name="training_type_param">Тип тренувань:</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
+    <string name="logo">logo</string>
+    <string name="back">back</string>
 
 </resources>
