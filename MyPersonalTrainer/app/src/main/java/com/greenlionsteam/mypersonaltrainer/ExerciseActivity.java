@@ -49,13 +49,14 @@ public class ExerciseActivity extends AppCompatActivity {
 
         class  MyViewHolder {
             ImageView clockImage, calenderImage;
-            TextView fTime, tTime, day,eTitle;
+            TextView fTime, tTime, day, eTitle, description;
 
             MyViewHolder(View v) {
                 calenderImage = (ImageView) v.findViewById(R.id.clock);
                 clockImage = (ImageView)v.findViewById(R.id.calender_img);
                 fTime = (TextView) v.findViewById(R.id.start_time);
                 tTime = (TextView)v.findViewById(R.id.end_time);
+                description = (TextView)v.findViewById(R.id.description);
                 eTitle = (TextView)v.findViewById(R.id.title_training);
                 day = (TextView)v.findViewById(R.id.day_of_week);
             }
@@ -77,7 +78,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
             ExerciseModel exerciseModel = getItem(position);
 
-            holder.tTime.setText(exerciseModel.getName().toString());
+            holder.description.setText(exerciseModel.getName().toString());
             //holder.eTitle.setText(exerciseModel.getId());
             holder.day.setText("Monday");
 

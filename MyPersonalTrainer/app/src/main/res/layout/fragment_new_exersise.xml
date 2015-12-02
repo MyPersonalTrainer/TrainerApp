@@ -46,12 +46,20 @@
             android:id="@+id/closeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cancel" />
+            style="@style/ThemeButton"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:text="cancel"
+            android:layout_marginRight="10dp" />
 
         <Button
             android:id="@+id/addBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/ThemeButton" android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
             android:text="add" />
     </LinearLayout>
 </LinearLayout>
