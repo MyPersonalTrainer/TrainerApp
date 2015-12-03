@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.greenlionsteam.mypersonaltrainer.ExerciseListFragment;
 import com.greenlionsteam.mypersonaltrainer.Models.UserParameters;
 import com.greenlionsteam.mypersonaltrainer.R;
 import com.greenlionsteam.mypersonaltrainer.adapters.ParametersPage1Adapter;
@@ -43,7 +44,7 @@ public class ParametersFragment extends Fragment {
     }
 
     public ParametersFragment() {
-        userParameters = new UserParameters();
+        userParameters = new UserParameters(false,18,80,185);
     }
 
     @Override
@@ -55,6 +56,7 @@ public class ParametersFragment extends Fragment {
         setupNextButton();
         setupParamsListViewAdapters();
         setupParamsListView();
+        setupFinishButton();
         return rootView;
     }
 
@@ -94,8 +96,7 @@ public class ParametersFragment extends Fragment {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //nextPage();
-                setupControlButtonsVisibility();
+                sendParameters();
             }
         });
     }
@@ -140,4 +141,9 @@ public class ParametersFragment extends Fragment {
             paramsListView.setAdapter(adapters.get(--currentAdapter));
         }
     }
+
+    private void sendParameters() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new ExerciseListFragment()).commit();
+        }
 }

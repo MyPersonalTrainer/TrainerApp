@@ -11,6 +11,7 @@ public class ExerciseModel {
     private int id;
     private String name;
     private DescriptionClass description;
+    private String muscle_group;
 
     public static class DescriptionClass{
         public List<String> getSteps() {
@@ -30,6 +31,7 @@ public class ExerciseModel {
             //mainJsonObject = mainJsonObject.getJSONObject("exercises");
             id = mainJsonObject.getInt("id");
             name = mainJsonObject.getString("name");
+            muscle_group = mainJsonObject.getJSONObject("muscle_group").getString("name");
             JSONArray array = null;
 
             array = mainJsonObject.getJSONArray("exercise_descriptions");
@@ -69,4 +71,7 @@ public class ExerciseModel {
         this.description = description;
     }
 
+    public String getMuscle_group() { return muscle_group; }
+
+    public void setMuscle_group(String muscle_group) { this.muscle_group = muscle_group;   }
 }

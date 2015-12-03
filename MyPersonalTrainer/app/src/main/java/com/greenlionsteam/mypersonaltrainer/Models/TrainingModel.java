@@ -18,6 +18,11 @@ public class TrainingModel  {
         return trainingModel;
     }
 
+    public static void CreateNewInstance()
+    {
+        trainingModel = new TrainingModel();
+    }
+
     public List<DaysModel> getDaysModels() {
         return daysModels;
     }

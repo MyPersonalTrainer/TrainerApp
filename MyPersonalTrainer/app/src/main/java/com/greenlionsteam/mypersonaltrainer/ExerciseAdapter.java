@@ -66,12 +66,25 @@ public class ExerciseAdapter extends ArrayAdapter<TrainingModel.DaysModel> {
             holder = (MyViewHolder) row.getTag();
         }
 
+        //get group_muscle string
+        String muscleGroup = "";
+        for(int i = 0; i < exerciseList.get(position).getExerciseModels().size(); ++i)
+        {
+            if(!muscleGroup.contains(exerciseList.get(position).getExerciseModels().get(i).getMuscle_group()))
+            muscleGroup += exerciseList.get(position).getExerciseModels().get(i).getMuscle_group() + ", ";
+        }
+        muscleGroup = muscleGroup.substring(0, muscleGroup.length() - 2);
+
         holder.calenderImage.setImageResource(R.drawable.clock_icon);
         holder.clockImage.setImageResource(R.drawable.calendar_icon);
         //holder.fTime.setText(Integer.toString(exerciseList.get(position).typeOfExercise.duration));
        // holder.tTime.setText(exerciseList.get(position).getDate().toString());
-        holder.eTitle.setText(exerciseList.get(position).getName());
-        holder.day.setText("Monday");
+        holder.eTitle.setText(muscleGroup);
+        if(position == 0)
+            holder.day.setText("Понеділок");
+        else if (position == 1)
+            holder.day.setText("Середа");
+        else holder.day.setText("П'ятниця");
         return row;
 
     }

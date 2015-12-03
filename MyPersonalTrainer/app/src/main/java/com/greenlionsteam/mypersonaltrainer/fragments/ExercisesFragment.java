@@ -125,7 +125,6 @@ public class ExercisesFragment extends Fragment {
                     selectedGroup = position;
                 }
                 else if(state == AdapterState.Exercises) {
-                    //// TODO: 01.12.2015 steps
                     setupExerciseDescriptionAdapter(new String[]{getExerciseGroup(selectedGroup)[position].getDescription().getSteps().get(0)});
                     exercisesListView.setAdapter(exerciseDescriptionAdapter);
                     state = AdapterState.Description;

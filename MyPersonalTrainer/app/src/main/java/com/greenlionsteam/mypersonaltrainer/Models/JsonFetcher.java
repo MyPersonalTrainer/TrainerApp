@@ -91,6 +91,7 @@ public class JsonFetcher {
     }
 
     public TrainingModel fetchExercises() throws Exception {//todo constants do
+        TrainingModel.CreateNewInstance();
         TrainingModel trainingModel = TrainingModel.Instance();
         try {
             //String date1 = "2015-08-13";

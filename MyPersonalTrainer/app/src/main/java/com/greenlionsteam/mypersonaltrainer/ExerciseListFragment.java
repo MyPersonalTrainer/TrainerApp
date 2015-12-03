@@ -61,12 +61,12 @@ public class ExerciseListFragment extends Fragment {
                 adapter.itemClicked(position);
             }
         });
-        v.findViewById(R.id.addNewExercise).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainFeedActivity)getActivity()).showAddingScreen();
-            }
-        });
+//        v.findViewById(R.id.addNewExercise).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((MainFeedActivity)getActivity()).showAddingScreen();
+//            }
+//        });
         return v;
     }
 }

@@ -10,6 +10,24 @@ public class UserParameters {
     private int complexity;
     private int training_type;
 
+    public UserParameters(boolean gender, int age, int weight, int height, int activity, int physical_level, int complexity, int training_type) {
+        this.gender = gender;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+        this.activity = activity;
+        this.physical_level = physical_level;
+        this.complexity = complexity;
+        this.training_type = training_type;
+    }
+
+    public UserParameters(boolean gender, int age, int weight, int height) {
+        this.gender = gender;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+    }
+
     public boolean isGender() {
         return gender;
     }

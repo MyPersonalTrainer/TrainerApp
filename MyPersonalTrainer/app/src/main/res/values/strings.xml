@@ -32,5 +32,6 @@
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="logo">logo</string>
     <string name="back">back</string>
+    <string name="title_activity_exercise_description">ExerciseDescriptionActivity</string>
 
 </resources>
