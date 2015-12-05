@@ -1,6 +1,5 @@
 package com.greenlionsteam.mypersonaltrainer.Models;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -21,7 +20,7 @@ import java.util.List;
 public class JsonFetcher {
     private static final String TAG = "TvEventsFetchr";
 
-    byte[] getUrlBytes(String urlSpec, String jsonParams) throws Exception {
+    byte[] getUrlBytes(String urlSpec, String params, String method) throws Exception {
         URL url = new URL(urlSpec);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
@@ -29,11 +28,11 @@ public class JsonFetcher {
         connection.setDoInput(true);
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod(method);
 
         //send parameters
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.writeBytes(jsonParams);
+        wr.writeBytes(params);
         wr.flush();
         wr.close();
 
@@ -61,7 +60,7 @@ public class JsonFetcher {
     }
 
     String getUrl(String urlSpec, String jsonParams) throws IOException, Exception {
-        return new String(getUrlBytes(urlSpec, jsonParams));
+        return new String(getUrlBytes(urlSpec, jsonParams, "POST"));
     }
 
     //input json, sport name; output array if matches
