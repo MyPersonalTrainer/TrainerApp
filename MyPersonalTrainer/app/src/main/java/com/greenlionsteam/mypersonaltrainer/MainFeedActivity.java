@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.greenlionsteam.mypersonaltrainer.fragments.AudioFragment;
 import com.greenlionsteam.mypersonaltrainer.fragments.ExercisesFragment;
 import com.greenlionsteam.mypersonaltrainer.fragments.ParametersFragment;
 import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
@@ -81,6 +82,15 @@ public class MainFeedActivity extends AppCompatActivity
             case 3:
                 fragment = ExercisesFragment.newInstance();
                 exercisesFragment = (ExercisesFragment)fragment;
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, fragment)
+                            .commit();
+                    break;
+                }
+            case 4:
+                fragment = AudioFragment.newInstance();
                 if (fragment != null) {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction()

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/audio_controls_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_half"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/audio_play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_media_play"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/audio_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/audio_controls_layout">
+    </ListView>
+
+</RelativeLayout>
