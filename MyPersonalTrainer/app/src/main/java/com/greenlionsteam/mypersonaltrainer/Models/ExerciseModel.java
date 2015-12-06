@@ -1,9 +1,51 @@
 package com.greenlionsteam.mypersonaltrainer.Models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExerciseModel {
     private int id;
     private String name;
-    private String description;
+    private DescriptionClass description;
+    private String muscle_group;
+
+    public static class DescriptionClass{
+        public List<String> getSteps() {
+            return steps;
+        }
+
+        public void setSteps(List<String> steps) {
+            this.steps = steps;
+        }
+
+        List<String> steps = new ArrayList<>();
+
+    }
+
+    public ExerciseModel(JSONObject mainJsonObject)  {
+        try {
+            //mainJsonObject = mainJsonObject.getJSONObject("exercises");
+            id = mainJsonObject.getInt("id");
+            name = mainJsonObject.getString("name");
+            muscle_group = mainJsonObject.getJSONObject("muscle_group").getString("name");
+            JSONArray array = null;
+
+            array = mainJsonObject.getJSONArray("exercise_descriptions");
+
+            description = new DescriptionClass();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String currStep = jsonObject.getString("step");
+                description.getSteps().add(currStep);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int getId() {
         return id;
@@ -21,12 +63,15 @@ public class ExerciseModel {
         this.name = name;
     }
 
-    public String getDescription() {
+    public DescriptionClass getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(DescriptionClass description) {
         this.description = description;
     }
 
+    public String getMuscle_group() { return muscle_group; }
+
+    public void setMuscle_group(String muscle_group) { this.muscle_group = muscle_group;   }
 }

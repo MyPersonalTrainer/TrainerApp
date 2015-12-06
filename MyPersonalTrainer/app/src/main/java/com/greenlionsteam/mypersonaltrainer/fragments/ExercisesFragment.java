@@ -125,7 +125,7 @@ public class ExercisesFragment extends Fragment {
                     selectedGroup = position;
                 }
                 else if(state == AdapterState.Exercises) {
-                    setupExerciseDescriptionAdapter(new String[]{getExerciseGroup(selectedGroup)[position].getDescription()});
+                    setupExerciseDescriptionAdapter(new String[]{getExerciseGroup(selectedGroup)[position].getDescription().getSteps().get(0)});
                     exercisesListView.setAdapter(exerciseDescriptionAdapter);
                     state = AdapterState.Description;
                     selectedExercise = position;

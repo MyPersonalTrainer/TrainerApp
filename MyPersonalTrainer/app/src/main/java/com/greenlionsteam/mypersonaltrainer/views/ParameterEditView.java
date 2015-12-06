@@ -1,7 +1,9 @@
 package com.greenlionsteam.mypersonaltrainer.views;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.v4.app.DialogFragment;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -31,7 +33,11 @@ public class ParameterEditView extends RelativeLayout {
     private int value;
 
     public ParameterEditView(Context context) {
+
         this(context, null);
+
+        paramEdit.setRawInputType(Configuration.KEYBOARD_12KEY);
+        paramEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     public ParameterEditView(Context context, AttributeSet attrs) {
@@ -40,6 +46,8 @@ public class ParameterEditView extends RelativeLayout {
         inflateView();
         initViews();
         setupButtons();
+        paramEdit.setRawInputType(Configuration.KEYBOARD_12KEY);
+        paramEdit.setInputType(InputType.TYPE_CLASS_NUMBER );
     }
 
     public void setDescription(String description) {

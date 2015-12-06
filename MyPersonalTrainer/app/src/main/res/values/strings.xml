@@ -11,7 +11,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
+    <string name="action_example"></string>
 
     <string name="action_settings">Settings</string>
 
@@ -29,5 +29,9 @@
     <string name="physical_level_param">Загальна фізична підготовка:</string>
     <string name="complexity_param">Тілобудова:</string>
     <string name="training_type_param">Тип тренувань:</string>
+    <string name="title_activity_exercise">ExerciseActivity</string>
+    <string name="logo">logo</string>
+    <string name="back">back</string>
+    <string name="title_activity_exercise_description">ExerciseDescriptionActivity</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.greenlionsteam.mypersonaltrainer;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
@@ -8,9 +9,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-/**
- * Created by BohdanUhryn on 29.11.2015.
- */
+import com.greenlionsteam.mypersonaltrainer.Models.JsonFetcher;
+import com.greenlionsteam.mypersonaltrainer.Models.TrainingModel;
+
+
 public class LogoActivity extends AppCompatActivity {
 
     private ImageView logoView;
@@ -23,7 +25,12 @@ public class LogoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_logo);
         initViews();
         startLogoAnimation();
+
+        //new DownloadFilesTask().execute();
+
     }
+
+
 
     private void initViews() {
         logoView = (ImageView) findViewById(R.id.logo_view);

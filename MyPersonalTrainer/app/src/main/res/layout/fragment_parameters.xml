@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:inputType="number">
 
     <LinearLayout
         android:id="@+id/parameters_pages_buttons"
@@ -42,7 +43,8 @@
         android:id="@+id/parameters_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/parameters_pages_buttons">
+        android:layout_above="@id/parameters_pages_buttons"
+        android:inputType="number">
 
 
 

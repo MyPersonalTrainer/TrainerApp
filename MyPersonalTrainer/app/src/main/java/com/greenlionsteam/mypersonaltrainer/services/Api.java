@@ -8,4 +8,5 @@ import retrofit.http.GET;
 public interface Api {
     @GET("/")
     public void getEverything(Callback<ModelParser> parser);
+
 }

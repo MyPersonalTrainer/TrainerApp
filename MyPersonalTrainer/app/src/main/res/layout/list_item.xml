@@ -10,10 +10,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="55dp"
             android:layout_margin="8dp"
-            android:src="@drawable/calendar"
+            android:src="@drawable/gym_icon"
             android:id="@+id/calender_img"/>
 
         <LinearLayout
@@ -40,15 +40,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="From 17:30"
+                    android:text="  From 17:30"
 
                     />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_toLeftOf="@id/start_time"
-                    android:src="@drawable/clock"
+                    android:src="@drawable/clock_icon"
                     android:id="@+id/clock"/>
 
 
@@ -68,10 +68,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="From 18:45"
+                    android:text="  To 18:45"
                     android:id="@+id/end_time"/>
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    android:id="@+id/description"/>
+            </RelativeLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
