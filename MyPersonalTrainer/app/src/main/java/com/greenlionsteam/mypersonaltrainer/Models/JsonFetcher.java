@@ -1,6 +1,5 @@
 package com.greenlionsteam.mypersonaltrainer.Models;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +21,33 @@ import java.util.List;
 public class JsonFetcher {
     private static final String TAG = "TvEventsFetchr";
 
-    byte[] getUrlBytes(String urlSpec, String jsonParams) throws Exception {
+
+    byte[] getUrlBytesGet(String urlSpec) throws Exception {
+        URL url = new URL(urlSpec);
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            InputStream in = connection.getInputStream();
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new Exception();
+            }
+            int bytesRead = 0;
+            byte[] buffer = new byte[1024];
+            while ((bytesRead = in.read(buffer)) > 0) {
+                out.write(buffer, 0, bytesRead);
+            }
+            out.close();
+            return out.toByteArray();
+        }
+        catch (Exception e){
+            throw e;
+        }
+        finally {
+            connection.disconnect();
+        }
+    }
+
+    byte[] getUrlBytes(String urlSpec, String params, String method) throws Exception {
         URL url = new URL(urlSpec);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
@@ -29,11 +55,11 @@ public class JsonFetcher {
         connection.setDoInput(true);
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod(method);
 
         //send parameters
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.writeBytes(jsonParams);
+        wr.writeBytes(params);
         wr.flush();
         wr.close();
 
@@ -60,8 +86,8 @@ public class JsonFetcher {
         }
     }
 
-    String getUrl(String urlSpec, String jsonParams) throws IOException, Exception {
-        return new String(getUrlBytes(urlSpec, jsonParams));
+    String getUrl(String urlSpec, String jsonParams, String method) throws IOException, Exception {
+        return new String(getUrlBytes(urlSpec, jsonParams, method));
     }
 
     //input json, sport name; output array if matches
@@ -104,7 +130,7 @@ public class JsonFetcher {
                     " \"training_type\" : \"2\"\n" +
                     " }\n" +
                     "}";
-            String jsonString = getUrl(url, jsonParams);
+            String jsonString = getUrl(url, jsonParams, "POST");
             //Log.i(TAG, "Fetched contents of URL: " + jsonString);
             parseExercises(trainingModel, jsonString);
         } catch (Exception ex){
@@ -115,5 +141,38 @@ public class JsonFetcher {
         return trainingModel;
     }
 
+
+    List<ExerciseModel> parseAllExercises(String jsonString)  {
+        List<ExerciseModel> exerciseModels = new ArrayList<>();
+        try {
+            JSONArray array = (JSONArray) new JSONTokener(jsonString.toString())
+                    .nextValue();
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                exerciseModels.add(new ExerciseModel(jsonObject));
+
+            }
+
+
+        }catch (Exception e) {
+
+            Log.d(TAG, e.getMessage());
+            return null;
+        }
+        return exerciseModels;
+    }
+
+    public void fetchAllExcercises() {
+        String url = /*context.getResources().getString(R.string, date);*/
+                "https://personal-trainer-app.herokuapp.com/exercises.json";
+        try {
+            String jsonString = new String(getUrlBytesGet(url));
+            List<ExerciseModel> exerciseModels = parseAllExercises(jsonString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
