@@ -21,10 +21,12 @@ public class SongsAdapter extends BaseAdapter {
 
     private Context context;
     private List<Song> songsList;
+    private int selectedSong;
 
     public SongsAdapter(Context context, List<Song> songsList) {
         this.context = context;
         this.songsList = songsList;
+        selectedSong = -1;
     }
 
     @Override
@@ -44,13 +46,22 @@ public class SongsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.view_song, parent, false);
+        LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.view_song, null);
         TextView titleView = (TextView)view.findViewById(R.id.song_title);
         TextView artistView = (TextView)view.findViewById(R.id.song_artist);
         Song item = songsList.get(position);
         titleView.setText(item.getTitle());
         artistView.setText(item.getArtist());
         view.setTag(position);
+        if (selectedSong == position) {
+            view.setBackgroundResource(android.R.color.holo_green_dark);
+        } else {
+            view.setBackgroundResource(android.R.color.white);
+        }
         return view;
+    }
+
+    public void setSelectedSong(int id) {
+        selectedSong = id;
     }
 }
