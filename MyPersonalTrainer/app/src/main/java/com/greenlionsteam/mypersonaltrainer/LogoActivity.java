@@ -26,8 +26,21 @@ public class LogoActivity extends AppCompatActivity {
         initViews();
         startLogoAnimation();
 
-        //new DownloadFilesTask().execute();
+        new DownloadFilesTask().execute();
 
+    }
+
+    class DownloadFilesTask extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            JsonFetcher jsonFetcher = new JsonFetcher();
+            jsonFetcher.fetchAllExcercises();
+
+            return null;
+        }
     }
 
 

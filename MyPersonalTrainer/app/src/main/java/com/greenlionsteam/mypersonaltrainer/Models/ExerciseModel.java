@@ -13,6 +13,13 @@ public class ExerciseModel {
     private DescriptionClass description;
     private String muscle_group;
 
+    public String getImgageUrl() {
+        return imgageUrl;
+    }
+
+    private String imgageUrl = "http://cs624024.vk.me/v624024962/4c0d6/OYNuhE0cdYU.jpg";
+
+
     public static class DescriptionClass{
         public List<String> getSteps() {
             return steps;
