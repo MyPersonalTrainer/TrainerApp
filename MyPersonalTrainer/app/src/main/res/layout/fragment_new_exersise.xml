@@ -57,7 +57,8 @@
             android:id="@+id/addBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ThemeButton" android:textStyle="bold"
+            style="@style/ThemeButton"
+            android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:text="add" />
