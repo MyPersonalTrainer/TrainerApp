@@ -88,7 +88,7 @@ public class SongsManager {
     public void playSong() {
         if (player != null) {
             player.start();
-        } else {
+        } else if ((songsList != null) && (songsList.size() > 0)) {
             switchSongById(songsList.get(0).getId());
         }
     }
@@ -108,21 +108,25 @@ public class SongsManager {
     }
 
     public void playNext() {
-        if (currentSongPosition < songsList.size() - 1) {
-            ++currentSongPosition;
-        } else {
-            currentSongPosition = 0;
+        if ((songsList != null) && (songsList.size() > 0)) {
+            if (currentSongPosition < songsList.size() - 1) {
+                ++currentSongPosition;
+            } else {
+                currentSongPosition = 0;
+            }
+            switchSongByPosition(currentSongPosition);
         }
-        switchSongByPosition(currentSongPosition);
     }
 
     public void playPrev() {
-        if (currentSongPosition > 0) {
-            --currentSongPosition;
-        } else {
-            currentSongPosition = songsList.size() - 1;
+        if ((songsList != null) && (songsList.size() > 0)) {
+            if (currentSongPosition > 0) {
+                --currentSongPosition;
+            } else {
+                currentSongPosition = songsList.size() - 1;
+            }
+            switchSongByPosition(currentSongPosition);
         }
-        switchSongByPosition(currentSongPosition);
     }
 
     public boolean isSongSelected(long id) {
