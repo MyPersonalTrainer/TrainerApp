@@ -14,6 +14,7 @@ package com.greenlionsteam.mypersonaltrainer.fragments;
         import android.widget.ListView;
 
         import com.greenlionsteam.mypersonaltrainer.ExerciseListFragment;
+        import com.greenlionsteam.mypersonaltrainer.Models.AllExercisesModel;
         import com.greenlionsteam.mypersonaltrainer.Models.Exercise;
         import com.greenlionsteam.mypersonaltrainer.Models.ExerciseModel;
         import com.greenlionsteam.mypersonaltrainer.Models.ModelParser;
@@ -54,6 +55,9 @@ public class ExercisesFragment extends Fragment {
     private ArrayAdapter<String> groupAdapter;
     private ArrayAdapter<String> exerciseAdapter;
     private ArrayAdapter<String> exerciseDescriptionAdapter;
+    private List<String> GroupsName =  new ArrayList<String>();
+    private List<String> exercises =  new ArrayList<String>();
+    AllExercisesModel allExercisesModel;
 
     public static ExercisesFragment newInstance() {
         ExercisesFragment fragment = new ExercisesFragment();
@@ -70,21 +74,20 @@ public class ExercisesFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_list_exercises, container, false);
         initViews();
-
-        RestClient.getApi().getEverything(new Callback<ModelParser>() {
-            @Override
-            public void success(ModelParser modelParser, Response response) {
-                dataFromJson = modelParser;
-                setupExerciseGroupAdapter(new String[]{"Спина", "Груди", "Біцепс", "Тріцепс", "Плечі", "Ноги", "Прес"});
-                setupExercisesListView();
-
+        allExercisesModel = AllExercisesModel.Instance();
+        String item = "";
+        for(int i = 0; i < allExercisesModel.exerciseModels.size(); i++) {
+            item = allExercisesModel.exerciseModels.get(i).getMuscle_group();
+            if (GroupsName.contains(item)) {
+            } else {
+                GroupsName.add(item);
             }
+        }
 
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
+        setupExerciseGroupAdapter(GroupsName);
+        exercisesListView.setAdapter(groupAdapter);
+        state = AdapterState.Groups;
+        setupExercisesListView();
         return rootView;
     }
 
@@ -97,19 +100,32 @@ public class ExercisesFragment extends Fragment {
         exercisesListView = (ListView) rootView.findViewById(R.id.exercises_list_view);
     }
 
-    private void setupExerciseGroupAdapter(String[] data){
+    private void setupExerciseGroupAdapter(List<String> data){
         groupAdapter = new  ArrayAdapter<String>(
                 getActivity(), android.R.layout.simple_list_item_1, data);
     }
 
-    private void setupExerciseAdapter(String[] data){
+    private void setupExerciseAdapter(String GroupName){
+        exercises =  new ArrayList<String>();
+        for(int i = 0; i < allExercisesModel.exerciseModels.size(); i++) {
+            if(GroupName.equals(allExercisesModel.exerciseModels.get(i).getMuscle_group()))
+                exercises.add(allExercisesModel.exerciseModels.get(i).getName());
+        }
         exerciseAdapter = new  ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_list_item_1, data);
+                getActivity(), android.R.layout.simple_list_item_1, exercises);
     }
 
-    private void setupExerciseDescriptionAdapter(String[] data){
+    private void setupExerciseDescriptionAdapter(String Exercise){
+        int position = 0;
+        for(int i = 0; i < allExercisesModel.exerciseModels.size(); i++) {
+            if(Exercise.equals(allExercisesModel.exerciseModels.get(i).getName()))
+            {
+                position = i;
+                break;
+            }
+        }
         exerciseDescriptionAdapter = new  ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_list_item_1, data);
+                getActivity(), android.R.layout.simple_list_item_1, allExercisesModel.exerciseModels.get(position).getDescription().getSteps());
     }
 
     private void setupExercisesListView() {
@@ -119,40 +135,19 @@ public class ExercisesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(state == AdapterState.Groups) {
-                    setupExerciseAdapter(getInfo(position));
+                    setupExerciseAdapter(GroupsName.get(position));
                     exercisesListView.setAdapter(exerciseAdapter);
                     state = AdapterState.Exercises;
                     selectedGroup = position;
                 }
                 else if(state == AdapterState.Exercises) {
-                    setupExerciseDescriptionAdapter(new String[]{getExerciseGroup(selectedGroup)[position].getDescription().getSteps().get(0)});
+                    setupExerciseDescriptionAdapter(exercises.get(position));
                     exercisesListView.setAdapter(exerciseDescriptionAdapter);
                     state = AdapterState.Description;
                     selectedExercise = position;
                 }
             }
         });
-    }
-
-    public ExerciseModel[] getExerciseGroup(int group){
-        switch (group){
-            case 0:
-             return dataFromJson.Back;
-            case 1:
-               return dataFromJson.Chest;
-            case 2:
-                return dataFromJson.Biceps;
-            case 3:
-                return dataFromJson.Triceps;
-            case 4:
-                return dataFromJson.Shoulders;
-            case 5:
-                return dataFromJson.Legs;
-            case 6:
-                return dataFromJson.Press;
-
-        }
-        return dataFromJson.Back;
     }
 
     public String [] getInfo(int group){
@@ -212,12 +207,12 @@ public class ExercisesFragment extends Fragment {
 
     public void GetBack(){
         if(state == AdapterState.Exercises) {
-            setupExerciseGroupAdapter(new String[]{"Спина", "Груди", "Біцепс", "Тріцепс", "Плечі", "Ноги", "Прес"});
+            setupExerciseGroupAdapter(GroupsName);
             exercisesListView.setAdapter(groupAdapter);
             state = AdapterState.Groups;
         }
         else if(state == AdapterState.Description) {
-            setupExerciseAdapter(getInfo(selectedGroup));
+            setupExerciseAdapter(GroupsName.get(selectedGroup));
             exercisesListView.setAdapter(exerciseAdapter);
             state = AdapterState.Exercises;
         }

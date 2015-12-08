@@ -12,13 +12,24 @@ public class ExerciseModel {
     private String name;
     private DescriptionClass description;
     private String muscle_group;
+    private String imageUrl;
+    private String videoUrl;
 
-    public String getImgageUrl() {
-        return imgageUrl;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    private String imgageUrl = "http://cs624024.vk.me/v624024962/4c0d6/OYNuhE0cdYU.jpg";
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
+    public String getImgageUrl() {
+        return imageUrl;
+    }
+
+    public void setImgageUrl(String imgageUrl) {
+        this.imageUrl = imgageUrl;
+    }
 
     public static class DescriptionClass{
         public List<String> getSteps() {
@@ -39,6 +50,8 @@ public class ExerciseModel {
             id = mainJsonObject.getInt("id");
             name = mainJsonObject.getString("name");
             muscle_group = mainJsonObject.getJSONObject("muscle_group").getString("name");
+            imageUrl = "https://personal-trainer-app.herokuapp.com" + mainJsonObject.getString("ex_image_url");
+            videoUrl = mainJsonObject.getString("video_url");
             JSONArray array = null;
 
             array = mainJsonObject.getJSONArray("exercise_descriptions");
