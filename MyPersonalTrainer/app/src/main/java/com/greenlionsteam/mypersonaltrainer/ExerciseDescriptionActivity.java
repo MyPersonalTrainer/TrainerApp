@@ -5,6 +5,7 @@ package com.greenlionsteam.mypersonaltrainer;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.graphics.drawable.Drawable;
+        import android.net.Uri;
         import android.os.AsyncTask;
         import android.os.Bundle;
         import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ package com.greenlionsteam.mypersonaltrainer;
         import android.view.ViewGroup;
         import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
+        import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.ListView;
         import android.widget.TextView;
@@ -48,13 +50,22 @@ public class ExerciseDescriptionActivity extends AppCompatActivity {
         ExercisesListView = (ListView)findViewById(R.id.ExercisesListView2);
 
         TrainingModel trainingModel = TrainingModel.Instance();
-        ExerciseModel exerciseModel = trainingModel.getDaysModels().get(positionOfDay).getExerciseModels().get(positionOfExercise);
+        final ExerciseModel exerciseModel = trainingModel.getDaysModels().get(positionOfDay).getExerciseModels().get(positionOfExercise);
         toolbar.setTitle("Опис вправи" + exerciseModel.getName());
         setupExerciseDescriptionAdapter(exerciseModel.getDescription().getSteps());
         ExercisesListView.setAdapter(exerciseDescriptionAdapter);
 
+        ImageButton imageButton = (ImageButton)findViewById(R.id.exercise_video_link);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(exerciseModel.getVideoUrl()));
+                startActivity(i);
+            }
+        });
         ImageView imageView = (ImageView)findViewById(R.id.exercise_img);
-        Picasso.with(this).load(exerciseModel.getImgageUrl()).resize(50, 50).into(imageView);
+        Picasso.with(this).load(exerciseModel.getImgageUrl()).resize(250, 250).into(imageView);
 }
 
 

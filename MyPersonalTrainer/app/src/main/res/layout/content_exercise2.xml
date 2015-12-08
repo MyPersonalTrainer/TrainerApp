@@ -8,16 +8,19 @@
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
+        android:layout_marginTop="100dp"
         android:layout_gravity="center"
         android:id="@+id/exercise_img"
 
         />
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_alignRight="@id/exercise_img"
         android:layout_alignBottom="@id/exercise_img"
-        android:text="text"
+        android:text="Переглянути відео, як правильно виконувати вправу"
+        android:id="@+id/exercise_video_link"
         />
 
     <ListView

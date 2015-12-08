@@ -142,33 +142,29 @@ public class JsonFetcher {
     }
 
 
-    List<ExerciseModel> parseAllExercises(String jsonString)  {
-        List<ExerciseModel> exerciseModels = new ArrayList<>();
-        try {
+    void parseAllExercises(AllExercisesModel allExercisesModel,String jsonString)  {
+      try {
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString())
                     .nextValue();
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                exerciseModels.add(new ExerciseModel(jsonObject));
+                allExercisesModel.exerciseModels.add(new ExerciseModel(jsonObject));
 
             }
-
-
         }catch (Exception e) {
-
             Log.d(TAG, e.getMessage());
-            return null;
         }
-        return exerciseModels;
     }
 
     public void fetchAllExcercises() {
         String url = /*context.getResources().getString(R.string, date);*/
                 "https://personal-trainer-app.herokuapp.com/exercises.json";
+        AllExercisesModel.CreateNewInstance();
+        AllExercisesModel allExercisesModel = AllExercisesModel.Instance();
         try {
             String jsonString = new String(getUrlBytesGet(url));
-            List<ExerciseModel> exerciseModels = parseAllExercises(jsonString);
+            parseAllExercises(allExercisesModel,jsonString);
 
         } catch (Exception e) {
             e.printStackTrace();
